@@ -20,7 +20,6 @@ return new class extends Migration
             $table->decimal('precio', 10, 2);
             $table->boolean('estado')->default(true);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

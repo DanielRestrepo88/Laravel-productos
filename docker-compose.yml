@@ -52,7 +52,7 @@ services:
         echo 'Instalando dependencias de Composer...';
         composer install --no-interaction --prefer-dist --optimize-autoloader;
       fi;
-      php artisan serve --host=0.0.0.0 --port=8000
+      php -S 0.0.0.0:8000 -t public
       "
 
 
