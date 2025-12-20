@@ -1,6 +1,6 @@
 @include('partials.header', ['title' => 'Detalle Producto', 'active' => 'productos'])
 
-<a href="{{ url('/Productos') }}" class="btn btn-link mb-3">&larr; Volver a Productos</a>
+<a href="{{ route('productos.index') }}" class="btn btn-link mb-3">&larr; Volver a Productos</a>
 
 <div class="card shadow-sm">
   <img
@@ -39,13 +39,8 @@
     </div>
 
     <div class="d-flex gap-2 mt-4">
-      <a href="{{ url('/Productos/' . $producto->id . '/edit') }}" class="btn btn-outline-warning">Editar</a>
-
-      <form
-        action="{{ url('/Productos/' . $producto->id . '/delete') }}"
-        method="POST"
-        onsubmit="return confirm('¿Seguro que deseas eliminar este producto?');"
-      >
+      <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-outline-warning">Editar</a>
+      <form action="{{ route('productos.destroy', $producto->id) }}" method="POST" onsubmit="return confirm('¿Seguro que deseas eliminar este producto?');">
         @csrf
         <button type="submit" class="btn btn-outline-danger">Eliminar</button>
       </form>

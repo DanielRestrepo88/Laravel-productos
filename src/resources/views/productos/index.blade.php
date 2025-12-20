@@ -1,6 +1,9 @@
 @include('partials.header', ['title' => 'Productos', 'active' => 'productos'])
 
-<h1 class="mb-4">Productos</h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="mb-0">Productos</h1>
+  <a href="{{ route('productos.create') }}" class="btn btn-primary">+ Crear Producto</a>
+</div>
 
 @if(session('success'))
   <div class="alert alert-success">{{ session('success') }}</div>
@@ -43,15 +46,9 @@
 
           <td class="text-center">
             <div class="d-flex justify-content-center gap-1 flex-wrap">
-              <a href="{{ url('/Productos/' . $p->id) }}" class="btn btn-sm btn-outline-primary">Ver</a>
-
-              <a href="{{ url('/Productos/' . $p->id . '/edit') }}" class="btn btn-sm btn-outline-warning">Editar</a>
-
-              <form
-                action="{{ url('/Productos/' . $p->id . '/delete') }}"
-                method="POST"
-                onsubmit="return confirm('¿Seguro que deseas eliminar este producto?');"
-              >
+              <a href="{{ route('productos.show', $p->id) }}" class="btn btn-sm btn-outline-primary">Ver</a>
+              <a href="{{ route('productos.edit', $p->id) }}" class="btn btn-sm btn-outline-warning">Editar</a>
+              <form action="{{ route('productos.destroy', $p->id) }}" method="POST" onsubmit="return confirm('¿Seguro que deseas eliminar este producto?');">
                 @csrf
                 <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
               </form>
