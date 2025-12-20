@@ -22,12 +22,11 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        // intenta autenticar
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            // vuelve a donde iba (si venía redirigida), si no a Inicio
-            return redirect()->intended('/Inicio');
+            return redirect()->route('carrito.index')
+                ->with('bienvenida', 'Bienvenido ' . Auth::user()->name . ', ya puedes iniciar con el proceso de compra de tus productos');
         }
 
         return back()

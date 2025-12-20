@@ -45,21 +45,14 @@
       </div>
     </div>
 
-    {{-- BOTÓN AGREGAR AL CARRITO --}}
     <div class="mt-4 d-flex justify-content-end">
       @auth
-        {{-- Más adelante aquí va el carrito real --}}
-        <button class="btn btn-success" disabled>
-          Agregar al carrito
-        </button>
+        <form action="{{ route('carrito.agregar', $producto->id) }}" method="POST">
+          @csrf
+          <button type="submit" class="btn btn-success">Agregar al carrito</button>
+        </form>
       @else
-        <a
-          href="{{ route('login') }}"
-          class="btn btn-primary"
-          onclick="alert('Debes iniciar sesión o registrarte para agregar productos al carrito');"
-        >
-          Agregar al carrito
-        </a>
+        <a href="{{ route('login') }}" class="btn btn-primary">Agregar al carrito</a>
       @endauth
     </div>
   </div>

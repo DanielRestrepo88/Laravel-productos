@@ -16,6 +16,11 @@ Route::get('/Productos/{producto}/edit', [ProductoController::class, 'edit'])->w
 Route::post('/Productos/{producto}', [ProductoController::class, 'update'])->whereNumber('producto')->name('productos.update');
 Route::post('/Productos/{producto}/delete', [ProductoController::class, 'destroy'])->whereNumber('producto')->name('productos.destroy');
 
+// CARRITO
+Route::get('/carrito', [\App\Http\Controllers\CarritoController::class, 'index'])->name('carrito.index');
+Route::post('/carrito/agregar/{producto}', [\App\Http\Controllers\CarritoController::class, 'agregar'])->whereNumber('producto')->name('carrito.agregar');
+Route::post('/carrito/{carritoItem}/delete', [\App\Http\Controllers\CarritoController::class, 'destroy'])->whereNumber('carritoItem')->name('carrito.destroy');
+
 // LOGIN
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
