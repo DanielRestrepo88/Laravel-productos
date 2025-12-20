@@ -1,6 +1,8 @@
 @include('partials.header', ['title' => 'Detalle Producto', 'active' => 'productos'])
 
-<a href="{{ route('productos.index') }}" class="btn btn-link mb-3">&larr; Volver a Productos</a>
+<a href="{{ route('productos.index') }}" class="btn btn-link mb-3">
+  &larr; Volver a Productos
+</a>
 
 <div class="card shadow-sm">
   <img
@@ -26,24 +28,39 @@
 
       <div class="col-md-4">
         <div class="p-3 border rounded text-md-end">
-          <strong>Precio:</strong> ${{ number_format((float)$producto->precio, 0, ',', '.') }}
+          <strong>Precio:</strong>
+          ${{ number_format((float)$producto->precio, 0, ',', '.') }}
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="p-3 border rounded text-md-end">
           <strong>Estado:</strong>
-          {!! $producto->estado ? '<span class="badge bg-success">Activo</span>' : '<span class="badge bg-secondary">Inactivo</span>' !!}
+          @if ($producto->estado)
+            <span class="badge bg-success">Activo</span>
+          @else
+            <span class="badge bg-secondary">Inactivo</span>
+          @endif
         </div>
       </div>
     </div>
 
-    <div class="d-flex gap-2 mt-4">
-      <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-outline-warning">Editar</a>
-      <form action="{{ route('productos.destroy', $producto->id) }}" method="POST" onsubmit="return confirm('¿Seguro que deseas eliminar este producto?');">
-        @csrf
-        <button type="submit" class="btn btn-outline-danger">Eliminar</button>
-      </form>
+    {{-- BOTÓN AGREGAR AL CARRITO --}}
+    <div class="mt-4 d-flex justify-content-end">
+      @auth
+        {{-- Más adelante aquí va el carrito real --}}
+        <button class="btn btn-success" disabled>
+          Agregar al carrito
+        </button>
+      @else
+        <a
+          href="{{ route('login') }}"
+          class="btn btn-primary"
+          onclick="alert('Debes iniciar sesión o registrarte para agregar productos al carrito');"
+        >
+          Agregar al carrito
+        </a>
+      @endauth
     </div>
   </div>
 </div>
